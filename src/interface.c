@@ -51,6 +51,8 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 {
 	widgets->main_window = GTK_WIDGET(gtk_builder_get_object(builder,
 				"main_window"));
+	widgets->about = GTK_WIDGET(gtk_builder_get_object(builder,
+				"about_auric"));
 	widgets->prefs.prefs_window = GTK_WIDGET(gtk_builder_get_object(
 				builder, "prefs_window"));
 	widgets->entity_liststore = GTK_LIST_STORE(gtk_builder_get_object(

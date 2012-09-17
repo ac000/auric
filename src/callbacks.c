@@ -256,6 +256,13 @@ void cb_ri_row(GtkTreeView *treeview, GtkTreePath *path,
 	}
 }
 
+void cb_about(GtkWidget *button, struct widgets *widgets)
+{
+	gtk_dialog_run(GTK_DIALOG(widgets->about));
+	gtk_widget_hide(widgets->about);
+
+}
+
 void cb_spawn(void)
 {
 	pid_t pid;
