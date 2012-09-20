@@ -160,7 +160,20 @@ void cb_display_prefs_window(GtkWidget *prefs_button, struct widgets *widgets)
 
 void cb_select_file(GtkWidget *file_chooser, struct widgets *widgets)
 {
-	widgets->file_chooser = file_chooser;
+	const char *file;
+	char *window_title;
+
+	file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(
+				widgets->file_chooser));
+	if (!file)
+		return;
+
+	window_title = g_strdup_printf("auric (%s)", file);
+	gtk_window_set_title(GTK_WINDOW(widgets->main_window), window_title);
+	g_free(window_title);
+
+	gtk_combo_box_set_active_id(GTK_COMBO_BOX(
+				widgets->entity_filter_list), 0);
 }
 
 void cb_toggle_cb(GtkWidget *cb, struct widgets *widgets)

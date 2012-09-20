@@ -47,6 +47,8 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 				"esi_entry"));
 	widgets->esi_ftype = GTK_WIDGET(gtk_builder_get_object(builder,
 				"esi_ftype"));
+	widgets->file_chooser = GTK_WIDGET(gtk_builder_get_object(builder,
+				"file_chooser"));
 	widgets->notebook[0].text = GTK_WIDGET(gtk_builder_get_object(builder,
 				"summary_1"));
 	widgets->notebook[0].buffer = GTK_TEXT_BUFFER(gtk_builder_get_object(

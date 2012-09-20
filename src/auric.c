@@ -1348,18 +1348,8 @@ void view_invoice_details(const char *invoice)
 
 void runit(GtkWidget *widget, struct widgets *widgets)
 {
-	const char *file;
 	const char *entity;
-	char *window_title;
 	int i;
-
-	file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(
-				widgets->file_chooser));
-	if (!file)
-		return;
-	window_title = g_strdup_printf("auric (%s)", file);
-	gtk_window_set_title(GTK_WINDOW(widgets->main_window), window_title);
-	g_free(window_title);
 
 	entity = gtk_combo_box_get_active_id(GTK_COMBO_BOX(
 				widgets->entity_filter_list));
@@ -1380,6 +1370,12 @@ void runit(GtkWidget *widget, struct widgets *widgets)
 		process_tct_values(entity);
 	} else {
 		unsigned long sigid;
+		const char *file;
+
+		file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(
+					widgets->file_chooser));
+		if (!file)
+			return;
 
 		/* Loading data from a new file. */
 		read_tmpl(file);
