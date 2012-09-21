@@ -26,6 +26,7 @@
       <column type="gboolean"/>
     </columns>
   </object>
+  <object class="GtkTextBuffer" id="hi_buffer"/>
   <object class="GtkTreeModelFilter" id="inv_filter">
     <property name="child_model">esi_liststore</property>
   </object>
@@ -120,7 +121,7 @@
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="padding">2</property>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
           </object>
@@ -350,6 +351,60 @@
               </packing>
             </child>
             <child>
+              <object class="GtkHBox" id="histogram_box">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkTextView" id="histogram_legend">
+                    <property name="width_request">450</property>
+                    <property name="height_request">450</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="margin_left">10</property>
+                    <property name="editable">False</property>
+                    <property name="wrap_mode">word</property>
+                    <property name="cursor_visible">False</property>
+                    <property name="buffer">hi_buffer</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkViewport" id="histogram_graph">
+                    <property name="width_request">450</property>
+                    <property name="height_request">450</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="histogram">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Histogram</property>
+              </object>
+              <packing>
+                <property name="position">4</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkBox" id="rv_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -390,7 +445,7 @@
                 </child>
               </object>
               <packing>
-                <property name="position">4</property>
+                <property name="position">5</property>
               </packing>
             </child>
             <child type="tab">
@@ -400,7 +455,7 @@
                 <property name="label" translatable="yes">Repeat Values</property>
               </object>
               <packing>
-                <property name="position">4</property>
+                <property name="position">5</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -483,7 +538,7 @@
                 </child>
               </object>
               <packing>
-                <property name="position">5</property>
+                <property name="position">6</property>
               </packing>
             </child>
             <child type="tab">
@@ -493,7 +548,7 @@
                 <property name="label" translatable="yes">Repeat Invoices</property>
               </object>
               <packing>
-                <property name="position">5</property>
+                <property name="position">6</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
@@ -566,7 +621,7 @@
                 </child>
               </object>
               <packing>
-                <property name="position">6</property>
+                <property name="position">7</property>
               </packing>
             </child>
             <child type="tab">
@@ -576,7 +631,7 @@
                 <property name="label" translatable="yes">Entities</property>
               </object>
               <packing>
-                <property name="position">6</property>
+                <property name="position">7</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>

@@ -79,6 +79,12 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 			gtk_builder_get_object(builder, "rv_buffer"));
 	widgets->notebook[RV_TAB].graph = GTK_WIDGET(gtk_builder_get_object(
 				builder, "rv_graph"));
+	widgets->notebook[HI_TAB].text = GTK_WIDGET(gtk_builder_get_object(
+				builder, "histogram_legend"));
+	widgets->notebook[HI_TAB].buffer = GTK_TEXT_BUFFER(
+			gtk_builder_get_object(builder, "hi_buffer"));
+	widgets->notebook[HI_TAB].graph = GTK_WIDGET(gtk_builder_get_object(
+				builder, "histogram_graph"));
 	widgets->notebook[RI_TAB].liststore = GTK_LIST_STORE(
 			gtk_builder_get_object(builder, "ri_liststore"));
 	widgets->notebook[RI_TAB].treeview = GTK_WIDGET(

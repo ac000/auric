@@ -12,12 +12,13 @@
 #define _COMMON_H_
 
 #define NR_POS		3
-#define NR_TABS		7
+#define NR_TABS		8
 
 #define CENT_TAB	3
-#define RV_TAB		4
-#define RI_TAB		5
-#define ESI_TAB		6
+#define HI_TAB		4
+#define RV_TAB		5
+#define RI_TAB		6
+#define ESI_TAB		7
 
 #define NR_RV		10
 

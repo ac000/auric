@@ -64,6 +64,14 @@ struct repeat_values {
 
 char tct_db[PATH_MAX];
 
+static const double hcolours[7][4] = { {0.0, 0.0, 1.0, 1.0},
+					{0.0, 0.5, 1.0, 1.0},
+					{0.0, 1.0, 1.0, 1.0},
+					{0.0, 1.0, 0.0, 1.0},
+					{0.9, 1.0, 0.0, 1.0},
+					{1.0, 0.5, 0.0, 1.0},
+					{1.0, 0.0, 0.0, 1.0} };
+
 bool mkdir_p(const char *path)
 {
 	char *dir;
@@ -372,6 +380,228 @@ draw_chart:
 	cairo_close_path(cr);
 	cairo_fill(cr);
 	cairo_stroke(cr);
+}
+
+static void display_histogram_legend(struct widgets *widgets, double hgrams[])
+{
+	PangoFontDescription *font_desc;
+	GtkTextIter iter;
+	char legend[64];
+	static bool tags = false;
+	int nr_values = d[10][0];
+
+	if (!tags) {
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi0", "background", "#0000ff", NULL);
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi1", "background", "#0077ff", NULL);
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi2", "background", "#00ffff", NULL);
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi3", "background", "#00ff00", NULL);
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi4", "background", "#e6ff00", NULL);
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi5", "background", "#ff7700", NULL);
+		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi6", "background", "#ff0000", NULL);
+
+		tags = true;
+	}
+
+	font_desc = pango_font_description_from_string("Monospace");
+	gtk_widget_override_font(widgets->notebook[HI_TAB].text, font_desc);
+	pango_font_description_free(font_desc);
+
+	gtk_text_buffer_set_text(widgets->notebook[HI_TAB].buffer,
+				"Histogram showing the distribution of "
+				"values from ", -1);
+	snprintf(legend, sizeof(legend), "%d examined\n\n", nr_values);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+				"Legend\n\n", -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi0", NULL);
+	snprintf(legend, sizeof(legend), "    <=%13.2f    : %6.1f%%\n",
+			10.00, hgrams[0] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi1", NULL);
+	snprintf(legend, sizeof(legend), "    <=%13.2f    : %6.1f%%\n",
+			100.00, hgrams[1] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi2", NULL);
+	snprintf(legend, sizeof(legend), "    <=%13.2f    : %6.1f%%\n",
+			1000.00, hgrams[2] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi3", NULL);
+	snprintf(legend, sizeof(legend), "    <=%13.2f    : %6.1f%%\n",
+			10000.00, hgrams[3] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi4", NULL);
+	snprintf(legend, sizeof(legend), "    <=%13.2f    : %6.1f%%\n",
+			100000.00, hgrams[4] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi5", NULL);
+	snprintf(legend, sizeof(legend), "    <=%13.2f    : %6.1f%%\n",
+			1000000.00, hgrams[5] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+
+	gtk_text_buffer_get_end_iter(GTK_TEXT_BUFFER(
+				widgets->notebook[HI_TAB].buffer), &iter);
+	gtk_text_buffer_insert_with_tags_by_name(
+			widgets->notebook[HI_TAB].buffer, &iter, "   ", -1,
+			"hi6", NULL);
+	snprintf(legend, sizeof(legend), "    > %13.2f    : %6.1f%%\n",
+			1000000.00, hgrams[6] / nr_values * 100.0);
+	gtk_text_buffer_insert_at_cursor(widgets->notebook[HI_TAB].buffer,
+			legend, -1);
+}
+
+static void draw_histogram(struct widgets *widgets)
+{
+	int i;
+	int nr_values = d[10][0];
+	double hgram[7];
+	double xc;
+	double yc;
+
+	blank_image();
+	memset(hgram, 0, sizeof(hgram));
+
+	for (i = 0; i < nr_values; i++) {
+		double *value;
+
+		value = &g_array_index(values, double, i);
+
+		if (*value > 1000000.00)
+			hgram[6]++;
+		else if (*value <= 1000000.00 && *value > 100000.00)
+			hgram[5]++;
+		else if (*value <= 100000.00 && *value > 10000.00)
+			hgram[4]++;
+		else if (*value <= 10000.00 && *value > 1000.00)
+			hgram[3]++;
+		else if (*value <= 1000.00 && *value > 100.00)
+			hgram[2]++;
+		else if (*value <= 100.00 && *value > 10.00)
+			hgram[1]++;
+		else
+			hgram[0]++;
+	}
+
+	cairo_set_line_width(cr, 1.0);
+	cairo_set_source_rgb(cr, 0.48, 0.49, 0.53);
+
+	/* Draw top left corner */
+	xc = 65.0;
+	yc = 15.0;
+	cairo_move_to(cr, xc, yc);
+	cairo_line_to(cr, xc + 10, yc);
+	cairo_stroke(cr);
+	cairo_move_to(cr, xc, yc);
+	cairo_line_to(cr, xc, yc + 10);
+	cairo_stroke(cr);
+	/* Draw top right corner */
+	xc = 225.0;
+	yc = 15.0;
+	cairo_move_to(cr, xc, yc);
+	cairo_line_to(cr, xc + 10, yc);
+	cairo_stroke(cr);
+	cairo_move_to(cr, xc + 10, yc);
+	cairo_line_to(cr, xc + 10, yc + 10);
+	cairo_stroke(cr);
+	/* Draw bottom left corner */
+	xc = 65.0;
+	yc = 430.0;
+	cairo_move_to(cr, xc, yc);
+	cairo_line_to(cr, xc + 10, yc);
+	cairo_stroke(cr);
+	cairo_move_to(cr, xc, yc);
+	cairo_line_to(cr, xc, yc - 10);
+	cairo_stroke(cr);
+	/* Dra bottom right corner */
+	xc = 225.0;
+	yc = 430.0;
+	cairo_move_to(cr, xc, yc);
+	cairo_line_to(cr, xc + 10, yc);
+	cairo_stroke(cr);
+	cairo_move_to(cr, xc + 10, yc);
+	cairo_line_to(cr, xc + 10, yc - 10);
+	cairo_stroke(cr);
+	/* Draw top markers */
+	xc = 82.0;
+	yc = 15.0;
+	for (i = 0; i < 7; i++) {
+		cairo_move_to(cr, xc, yc);
+		cairo_line_to(cr, xc + 16.0, yc);
+		cairo_stroke(cr);
+		xc += 20.0;
+	}
+	/* Draw bottom markers */
+	xc = 82.0;
+	yc = 430.0;
+	for (i = 0; i < 7; i++) {
+		cairo_move_to(cr, xc, yc);
+		cairo_line_to(cr, xc + 16.0, yc);
+		cairo_stroke(cr);
+		xc += 20.0;
+	}
+	/* Draw histogram */
+	xc = 60.0;
+	for (i = 0; i < 7; i++) {
+		double perc;
+
+		xc += 20.0;
+		if (hgram[i] == 0)
+			continue;
+
+		perc = (hgram[i] / (double)nr_values) * 100.0;
+		yc = 400.0 - ((perc / 100.0) * 400.0) + 22;
+
+		cairo_set_source_rgba(cr, hcolours[i][0], hcolours[i][1],
+				hcolours[i][2], hcolours[i][3]);
+		cairo_rectangle(cr, xc, yc, 20.0, (perc / 100.0) * 400.0);
+		cairo_fill(cr);
+	}
+
+	display_histogram_legend(widgets, hgram);
 }
 
 static void display_summary(struct widgets *widgets, int tab)
@@ -1411,6 +1641,8 @@ void runit(GtkWidget *widget, struct widgets *widgets)
 	draw_pie_chart();
 	display_graph(widgets, CENT_TAB);
 	display_repeat_values(widgets);
+	draw_histogram(widgets);
+	display_graph(widgets, HI_TAB);
 	display_repeat_invoices(widgets, entity);
 	display_entities(widgets, entity, SORT_COL_SPD);
 
