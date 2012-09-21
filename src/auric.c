@@ -519,6 +519,8 @@ static void display_repeat_values(struct widgets *widgets)
 	/* For small data sets we may have less than NR_RV in the array */
 	for (i = 0; i < (NR_RV > asize ? asize : NR_RV); i++) {
 		rv = g_list_nth_data(l, i);
+		if (rv->nr < 2)
+			continue;
 		snprintf(line, sizeof(line), "\t%10d : %12.2f\n",
 				rv->nr, rv->value);
 		gtk_text_buffer_insert_at_cursor(
@@ -526,15 +528,12 @@ static void display_repeat_values(struct widgets *widgets)
 	}
 
 	rv = g_list_nth_data(l, i + 1);
-	if (rv) {
-		nr = rv->nr;
-		if (rv->nr == nr) {
-			snprintf(line, sizeof(line),
+	if (rv && rv->nr > 1) {
+		snprintf(line, sizeof(line),
 				"\n\n* There was at least one more value that "
-				"had been seen %d time(s).\n", nr);
-			gtk_text_buffer_insert_at_cursor(
+				"had been seen %d time(s).\n", rv->nr);
+		gtk_text_buffer_insert_at_cursor(
 				widgets->notebook[RV_TAB].buffer, line, -1);
-		}
 	}
 	g_list_free_full(l, free);
 }
