@@ -64,6 +64,8 @@ struct repeat_values {
 
 char tct_db[PATH_MAX];
 
+int debug = 0;
+
 static const double hcolours[7][4] = { {0.0, 0.0, 1.0, 1.0},
 					{0.0, 0.5, 1.0, 1.0},
 					{0.0, 1.0, 1.0, 1.0},
@@ -1185,7 +1187,7 @@ out:
 
 static void disp_vars(gpointer value, gpointer user_data)
 {
-	fprintf(stderr, "%s\t", (char *)value);
+	fprintf(stdout, "%s\t", (char *)value);
 }
 
 static void dump_tct(void)
@@ -1204,7 +1206,7 @@ static void dump_tct(void)
 	tctdbqrysetorder(qry, "gross", TDBQOSTRASC);
 	res = tctdbqrysearch(qry);
 	nres = tclistnum(res);
-	fprintf(stderr, "%d item(s)\n", nres);
+	fprintf(stdout, "\n%d item(s)\n", nres);
 	for (i = 0; i < nres; i++) {
 		TCMAP *cols;
 		const char *rbuf;
@@ -1215,8 +1217,8 @@ static void dump_tct(void)
 		cols = tctdbget(tdb, rbuf, rsize);
 		tcmapiterinit(cols);
 		while ((cname = tcmapiternext2(cols)) != NULL)
-			fprintf(stderr, "%s\t", tcmapget2(cols, cname));
-		fprintf(stderr, "\n");
+			fprintf(stdout, "%s\t", tcmapget2(cols, cname));
+		fprintf(stdout, "\n");
 		tcmapdel(cols);
 	}
 	tclistdel(res);
@@ -1262,8 +1264,10 @@ static void read_tmpl(const char *file)
 		TCMAP *cols;
 
 		process_value(g_ptr_array_index(vars, 5));
-//		g_ptr_array_foreach(vars, disp_vars, NULL);
-//		fprintf(stderr, "\n");
+		if (debug) {
+			g_ptr_array_foreach(vars, disp_vars, NULL);
+			fprintf(stdout, "\n");
+		}
 		primary_key_size = snprintf(pkbuf, sizeof(pkbuf), "%ld",
 				(int64_t)tctdbgenuid(tdb));
 		cols = tcmapnew3("entity_code", g_ptr_array_index(vars, 0),
@@ -1290,8 +1294,8 @@ static void read_tmpl(const char *file)
 	tctdbclose(tdb);
 	tctdbdel(tdb);
 
-//	fprintf(stderr, "\n\n");
-//	dump_tct();
+	if (debug)
+		dump_tct();
 }
 
 void load_prefs(struct widgets *widgets)
@@ -1640,6 +1644,7 @@ int main(int argc, char **argv)
 	GError *error = NULL;
 	struct widgets *widgets;
 	int i;
+	char *e_debug;
 
 	gtk_init(&argc, &argv);
 
@@ -1662,6 +1667,10 @@ int main(int argc, char **argv)
 	set_def_prefs(widgets);
 	load_prefs(widgets);
 	snprintf(tct_db, sizeof(tct_db), "/tmp/auric.tct-%d", getpid());
+
+	e_debug = getenv("AURIC_DEBUG");
+	if (e_debug && (strcmp(e_debug, "1") == 0))
+		debug = 1;
 
 	gtk_main();
 

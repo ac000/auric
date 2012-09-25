@@ -37,5 +37,6 @@
 
 extern unsigned char thresholds;
 extern char val_fmt[5];
+extern int debug;
 
 #endif /* _COMMON_H_ */
