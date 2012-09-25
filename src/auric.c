@@ -1232,8 +1232,6 @@ static void read_tmpl(const char *file)
 
         tdb = tctdbnew();
         tctdbopen(tdb, tct_db, TDBOWRITER | TDBOTRUNC | TDBOCREAT);
-//	tctdbsetindex(tdb, "entity_name", TDBITLEXICAL);
-//	tctdbsetindex(tdb, "po_no", TDBITLEXICAL);
 
 	fp = fopen(file, "r");
 	while (fgets(line, sizeof(line), fp) != NULL) {
