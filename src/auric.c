@@ -387,27 +387,7 @@ static void display_histogram_legend(struct widgets *widgets, double hgrams[])
 	PangoFontDescription *font_desc;
 	GtkTextIter iter;
 	char legend[64];
-	static bool tags = false;
 	int nr_values = d[10][0];
-
-	if (!tags) {
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi0", "background", "#0000ff", NULL);
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi1", "background", "#0077ff", NULL);
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi2", "background", "#00ffff", NULL);
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi3", "background", "#00ff00", NULL);
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi4", "background", "#e6ff00", NULL);
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi5", "background", "#ff7700", NULL);
-		gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
-			"hi6", "background", "#ff0000", NULL);
-
-		tags = true;
-	}
 
 	font_desc = pango_font_description_from_string("Monospace");
 	gtk_widget_override_font(widgets->notebook[HI_TAB].text, font_desc);

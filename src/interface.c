@@ -16,6 +16,24 @@
 #include "interface.h"
 #include "common.h"
 
+static void create_tags(struct widgets *widgets)
+{
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi0", "background", "#0000ff", NULL);
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi1", "background", "#0077ff", NULL);
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi2", "background", "#00ffff", NULL);
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi3", "background", "#00ff00", NULL);
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi4", "background", "#e6ff00", NULL);
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi5", "background", "#ff7700", NULL);
+	gtk_text_buffer_create_tag(widgets->notebook[HI_TAB].buffer,
+			"hi6", "background", "#ff0000", NULL);
+}
+
 void format_cell_value(GtkTreeViewColumn *col,
 		       GtkCellRenderer *cell, GtkTreeModel *model,
 		       GtkTreeIter *iter, gpointer col_no)
@@ -138,4 +156,6 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 				builder, "th3"));
 	widgets->prefs.dp_spin = GTK_WIDGET(gtk_builder_get_object(
 				builder, "dp_spin"));
+
+	create_tags(widgets);
 }
