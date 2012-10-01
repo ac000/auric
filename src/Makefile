@@ -17,4 +17,4 @@ interface.o:  common.h interface.h interface.c
 	${CC} $(CFLAGS) -c interface.c ${INCS}
 
 clean:
-	rm *.o auric
+	rm -f *.o auric
