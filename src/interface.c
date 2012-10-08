@@ -156,6 +156,8 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 				builder, "th3"));
 	widgets->prefs.dp_spin = GTK_WIDGET(gtk_builder_get_object(
 				builder, "dp_spin"));
+	widgets->tmpl_error = GTK_WIDGET(gtk_builder_get_object(builder,
+				"tmpl_error_dialog"));
 
 	create_tags(widgets);
 }

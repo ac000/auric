@@ -52,6 +52,7 @@ struct notebook {
 
 struct widgets {
 	GtkWidget *main_window;
+	GtkWidget *tmpl_error;
 	GtkWidget *file_chooser;
 	GtkListStore *entity_liststore;
 	GtkWidget *entity_filter_list;

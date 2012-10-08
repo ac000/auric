@@ -36,6 +36,8 @@
 #include "interface.h"
 #include "auric.h"
 
+#define NR_TMPL_FIELDS	13
+
 static const int x = 450;
 static const int y = 450;
 static const double width = 40.0;
@@ -1226,11 +1228,26 @@ static void dump_tct(void)
 	tctdbclose(tdb);
 }
 
-static void read_tmpl(const char *file)
+static void display_tmpl_error(int lineno, const char *file,
+			       struct widgets *widgets)
+{
+	char msg[PATH_MAX + 80];
+
+	snprintf(msg, sizeof(msg), "Incorrect number of fields on line %d "
+			"in %s", lineno, file);
+	gtk_message_dialog_set_markup(GTK_MESSAGE_DIALOG(widgets->tmpl_error),
+			msg);
+	gtk_dialog_run(GTK_DIALOG(widgets->tmpl_error));
+	gtk_widget_hide(widgets->tmpl_error);
+}
+
+static bool read_tmpl(const char *file, struct widgets *widgets)
 {
 	FILE *fp;
 	char line[LINE_MAX];
+	int lineno = 1;
 	TCTDB *tdb;
+	bool ret = true;
 
         tdb = tctdbnew();
         tctdbopen(tdb, tct_db, TDBOWRITER | TDBOTRUNC | TDBOCREAT);
@@ -1240,6 +1257,7 @@ static void read_tmpl(const char *file)
 		char *token;
 		char *running;
 		char *sptr;
+		int nr_fields = 0;
 		GPtrArray *vars = NULL;
 
 		vars = g_ptr_array_new_with_free_func(free);
@@ -1257,8 +1275,15 @@ static void read_tmpl(const char *file)
 				g_ptr_array_add(vars,
 						strdup(g_strstrip(token)));
 			token = strsep(&running, "\t");
+			nr_fields++;
 		}
 		free(sptr);
+		if (nr_fields != NR_TMPL_FIELDS) {
+			g_ptr_array_free(vars, TRUE);
+			display_tmpl_error(lineno, file, widgets);
+			ret = false;
+			goto out;
+		}
 		int primary_key_size;
 		char pkbuf[256];
 		TCMAP *cols;
@@ -1288,14 +1313,18 @@ static void read_tmpl(const char *file)
 		tcmapdel(cols);
 		g_ptr_array_free(vars, TRUE);
 		vars = NULL;
+		lineno++;
 	}
-	fclose(fp);
 
+out:
+	fclose(fp);
 	tctdbclose(tdb);
 	tctdbdel(tdb);
 
-	if (debug)
+	if (debug && ret)
 		dump_tct();
+
+	return ret;
 }
 
 void load_prefs(struct widgets *widgets)
@@ -1582,6 +1611,7 @@ void runit(GtkWidget *widget, struct widgets *widgets)
 	} else {
 		unsigned long sigid;
 		const char *file;
+		bool ret;
 
 		file = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(
 					widgets->file_chooser));
@@ -1589,7 +1619,9 @@ void runit(GtkWidget *widget, struct widgets *widgets)
 			return;
 
 		/* Loading data from a new file. */
-		read_tmpl(file);
+		ret = read_tmpl(file, widgets);
+		if (!ret)
+			return;
 
 		/*
 		 * We need to temporarily block the "changed" signal from
