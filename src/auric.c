@@ -1249,8 +1249,8 @@ static bool read_tmpl(const char *file, struct widgets *widgets)
 	TCTDB *tdb;
 	bool ret = true;
 
-        tdb = tctdbnew();
-        tctdbopen(tdb, tct_db, TDBOWRITER | TDBOTRUNC | TDBOCREAT);
+	tdb = tctdbnew();
+	tctdbopen(tdb, tct_db, TDBOWRITER | TDBOTRUNC | TDBOCREAT);
 
 	fp = fopen(file, "r");
 	while (fgets(line, sizeof(line), fp) != NULL) {
