@@ -1486,17 +1486,26 @@ void view_invoice_details(const char *invoice)
 	GtkBuilder *builder;
 	GError *error = NULL;
 	struct ri_vid *ri_vid;
+	struct stat st;
 	TCTDB *tdb;
 	TDBQRY *qry;
 	TCLIST *res;
 	int nres;
 	int i;
 	int rsize;
+	int ret;
+	const char *glade_path;
 	char *window_title;
 	GtkTreeModel *model;
 
+	ret = stat("auric_ri_vid.glade", &st);
+	if (ret == 0)
+		glade_path = "auric_ri_vid.glade";
+	else
+		glade_path = "/usr/share/auric/auric_ri_vid.glade";
+
 	builder = gtk_builder_new();
-	if (!gtk_builder_add_from_file(builder, "auric_ri_vid.glade", &error))
+	if (!gtk_builder_add_from_file(builder, glade_path, &error))
 		g_warning("%s", error->message);
 
 	ri_vid = g_slice_new(struct ri_vid);
@@ -1675,13 +1684,22 @@ int main(int argc, char **argv)
 	GtkBuilder *builder;
 	GError *error = NULL;
 	struct widgets *widgets;
+	struct stat st;
 	int i;
+	int ret;
+	const char *glade_path;
 	char *e_debug;
 
 	gtk_init(&argc, &argv);
 
+	ret = stat("auric.glade", &st);
+	if (ret == 0)
+		glade_path = "auric.glade";
+	else
+		glade_path = "/usr/share/auric/auric.glade";
+
 	builder = gtk_builder_new();
-	if (!gtk_builder_add_from_file(builder, "auric.glade", &error)) {
+	if (!gtk_builder_add_from_file(builder, glade_path, &error)) {
 		g_warning("%s", error->message);
 		exit(EXIT_FAILURE);
 	}
