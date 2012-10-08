@@ -8,8 +8,8 @@
  * See COPYING
  */
 
-#ifndef _DA_GTK_H_
-#define _DA_GTK_H_
+#ifndef _AURIC_H_
+#define _AURIC_H_
 
 #include <stdbool.h>
 
@@ -24,4 +24,4 @@ void set_prefs(struct widgets *widgets);
 void view_invoice_details(const char *invoice);
 void runit(GtkWidget *widget, struct widgets *widgets);
 
-#endif /* _DA_GTK_H_ */
+#endif /* _AURIC_H_ */
