@@ -143,8 +143,11 @@ void cb_save_prefs(GtkWidget *button, struct widgets *widgets)
 	fprintf(fp, "dp=%g\n", gtk_spin_button_get_value(
 				GTK_SPIN_BUTTON(widgets->prefs.dp_spin)));
 
+	fflush(fp);
+	fsync(fileno(fp));
 	fclose(fp);
 	renameat(dirfd, prefs_tmp, dirfd, prefs);
+	fsync(dirfd);
 	close(dirfd);
 }
 
