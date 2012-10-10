@@ -21,7 +21,7 @@ bool mkdir_p(const char *path);
 void load_prefs(struct widgets *widgets);
 void set_def_prefs(struct widgets *widgets);
 void set_prefs(struct widgets *widgets);
-void view_invoice_details(const char *invoice);
+void view_invoice_details(const char *search, const char *what);
 void runit(GtkWidget *widget, struct widgets *widgets);
 
 #endif /* _AURIC_H_ */

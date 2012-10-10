@@ -15,13 +15,13 @@
 
 #include "common.h"
 
-struct ri_vid {
+struct vid {
 	GtkWidget *window;
 	GtkListStore *liststore;
 	GtkWidget *treeview;
 	GtkCellRenderer *cell;
 	GtkTreeViewColumn *col;
-} ri_vid;
+} vid;
 
 struct prefs {
 	GtkWidget *prefs_window;

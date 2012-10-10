@@ -95,10 +95,10 @@ void cb_quit(void)
 	gtk_main_quit();
 }
 
-void cb_ri_vid_close(GtkWidget *button, struct ri_vid *ri_vid)
+void cb_vid_close(GtkWidget *button, struct vid *vid)
 {
-	gtk_widget_destroy(ri_vid->window);
-	g_slice_free(struct ri_vid, ri_vid);
+	gtk_widget_destroy(vid->window);
+	g_slice_free(struct vid, vid);
 }
 
 void cb_reset_prefs_config(GtkWidget *button, struct widgets *widgets)
@@ -243,19 +243,23 @@ void cb_toggle_esi(GtkWidget *widget, struct widgets *widgets)
 		gtk_widget_set_sensitive(widgets->esi_filter_box, FALSE);
 }
 
-void cb_ri_row(GtkTreeView *treeview, GtkTreePath *path,
-	       GtkTreeViewColumn *col, struct widgets *widgets)
+void cb_inv_row(GtkTreeView *treeview, GtkTreePath *path,
+		GtkTreeViewColumn *col)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
+	const char *wname = gtk_widget_get_name(GTK_WIDGET(treeview));
 
 	model = gtk_tree_view_get_model(treeview);
 	if (gtk_tree_model_get_iter(model, &iter, path)) {
-		char *invoice;
+		char *search;
 
-		gtk_tree_model_get(model, &iter, 0, &invoice, -1);
-		view_invoice_details(invoice);
-		free(invoice);
+		gtk_tree_model_get(model, &iter, 0, &search, -1);
+		if (strcmp(wname, "ri_treeview") == 0)
+			view_invoice_details(search, INV_TCT_COL);
+		else
+			view_invoice_details(search, ENT_TCT_COL);
+		free(search);
 	}
 }
 

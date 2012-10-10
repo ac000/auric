@@ -27,7 +27,7 @@ install -Dp -m0755 src/auric $RPM_BUILD_ROOT/%{_bindir}/auric
 install -Dp -m0644 auric.desktop $RPM_BUILD_ROOT/%{_datadir}/applications/auric.desktop
 install -Dp -m0644 auric.png $RPM_BUILD_ROOT/%{_datadir}/pixmaps/auric.png
 install -Dp -m0644 src/auric.glade $RPM_BUILD_ROOT/%{_datadir}/auric/auric.glade
-install -Dp -m0644 src/auric_ri_vid.glade $RPM_BUILD_ROOT/%{_datadir}/auric/auric_ri_vid.glade
+install -Dp -m0644 src/auric_vid.glade $RPM_BUILD_ROOT/%{_datadir}/auric/auric_vid.glade
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -38,7 +38,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/applications/auric.desktop
 %{_datadir}/pixmaps/auric.png
 %{_datadir}/auric/auric.glade
-%{_datadir}/auric/auric_ri_vid.glade
+%{_datadir}/auric/auric_vid.glade
 %doc README COPYING
 
 %changelog

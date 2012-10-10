@@ -33,6 +33,7 @@
 #define SORT_COL_SPD	1
 #define SORT_COL_INV	2
 
+#define ENT_TCT_COL	"entity_name"
 #define INV_TCT_COL	"inv_no"
 
 extern unsigned char thresholds;

@@ -109,6 +109,8 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 			gtk_builder_get_object(builder, "ri_liststore"));
 	widgets->notebook[RI_TAB].treeview = GTK_WIDGET(
 			gtk_builder_get_object(builder, "ri_treeview"));
+	gtk_widget_set_name(GTK_WIDGET(widgets->notebook[RI_TAB].treeview),
+			"ri_treeview");
 	widgets->notebook[RI_TAB].col = GTK_TREE_VIEW_COLUMN(
 			gtk_builder_get_object(builder,
 				"ri_value"));
@@ -120,6 +122,10 @@ void  get_widgets(struct widgets *widgets, GtkBuilder *builder)
 			GINT_TO_POINTER(3), NULL);
 	widgets->notebook[ESI_TAB].liststore = GTK_LIST_STORE(
 			gtk_builder_get_object(builder, "esi_liststore"));
+	widgets->notebook[ESI_TAB].treeview = GTK_WIDGET(
+			gtk_builder_get_object(builder, "esi_treeview"));
+	gtk_widget_set_name(GTK_WIDGET(widgets->notebook[ESI_TAB].treeview),
+			"esi_treeview");
 	widgets->notebook[ESI_TAB].filter = GTK_TREE_MODEL(
 			gtk_builder_get_object(builder, "inv_filter"));
 	gtk_tree_model_filter_set_visible_column(GTK_TREE_MODEL_FILTER(

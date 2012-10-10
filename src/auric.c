@@ -1481,11 +1481,11 @@ void set_prefs(struct widgets *widgets)
 	}
 }
 
-void view_invoice_details(const char *invoice)
+void view_invoice_details(const char *search, const char *what)
 {
 	GtkBuilder *builder;
 	GError *error = NULL;
-	struct ri_vid *ri_vid;
+	struct vid *vid;
 	struct stat st;
 	TCTDB *tdb;
 	TDBQRY *qry;
@@ -1498,58 +1498,58 @@ void view_invoice_details(const char *invoice)
 	char *window_title;
 	GtkTreeModel *model;
 
-	ret = stat("auric_ri_vid.glade", &st);
+	ret = stat("auric_vid.glade", &st);
 	if (ret == 0)
-		glade_path = "auric_ri_vid.glade";
+		glade_path = "auric_vid.glade";
 	else
-		glade_path = "/usr/share/auric/auric_ri_vid.glade";
+		glade_path = "/usr/share/auric/auric_vid.glade";
 
 	builder = gtk_builder_new();
 	if (!gtk_builder_add_from_file(builder, glade_path, &error))
 		g_warning("%s", error->message);
 
-	ri_vid = g_slice_new(struct ri_vid);
-	ri_vid->window = GTK_WIDGET(gtk_builder_get_object(builder,
+	vid = g_slice_new(struct vid);
+	vid->window = GTK_WIDGET(gtk_builder_get_object(builder,
 				"window1"));
-	ri_vid->liststore = GTK_LIST_STORE(gtk_builder_get_object(builder,
+	vid->liststore = GTK_LIST_STORE(gtk_builder_get_object(builder,
 				"liststore1"));
-	ri_vid->treeview = GTK_WIDGET(gtk_builder_get_object(builder,
+	vid->treeview = GTK_WIDGET(gtk_builder_get_object(builder,
 				"treeview1"));
-	ri_vid->col = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder,
+	vid->col = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder,
 				"treeviewcolumn6"));
-	ri_vid->cell = GTK_CELL_RENDERER(gtk_builder_get_object(builder,
+	vid->cell = GTK_CELL_RENDERER(gtk_builder_get_object(builder,
 				"gross"));
-	gtk_tree_view_column_set_cell_data_func(ri_vid->col, ri_vid->cell,
+	gtk_tree_view_column_set_cell_data_func(vid->col, vid->cell,
 			format_cell_value, GINT_TO_POINTER(5), NULL);
-	ri_vid->col = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder,
+	vid->col = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder,
 				"treeviewcolumn7"));
-	ri_vid->cell = GTK_CELL_RENDERER(gtk_builder_get_object(builder,
+	vid->cell = GTK_CELL_RENDERER(gtk_builder_get_object(builder,
 				"vat"));
-	gtk_tree_view_column_set_cell_data_func(ri_vid->col, ri_vid->cell,
+	gtk_tree_view_column_set_cell_data_func(vid->col, vid->cell,
 			format_cell_value, GINT_TO_POINTER(6), NULL);
-	ri_vid->col = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder,
+	vid->col = GTK_TREE_VIEW_COLUMN(gtk_builder_get_object(builder,
 			"treeviewcolumn8"));
-	ri_vid->cell = GTK_CELL_RENDERER(gtk_builder_get_object(builder,
+	vid->cell = GTK_CELL_RENDERER(gtk_builder_get_object(builder,
 				"net"));
-	gtk_tree_view_column_set_cell_data_func(ri_vid->col, ri_vid->cell,
+	gtk_tree_view_column_set_cell_data_func(vid->col, vid->cell,
 			format_cell_value, GINT_TO_POINTER(7), NULL);
 
-	gtk_builder_connect_signals(builder, ri_vid);
+	gtk_builder_connect_signals(builder, vid);
 	g_object_unref(G_OBJECT(builder));
 
-	window_title = g_strdup_printf("auric / invoice / %s", invoice);
-	gtk_window_set_title(GTK_WINDOW(ri_vid->window), window_title);
+	window_title = g_strdup_printf("auric / invoice / %s", search);
+	gtk_window_set_title(GTK_WINDOW(vid->window), window_title);
 	g_free(window_title);
 
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(ri_vid->treeview));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(vid->treeview));
 	g_object_ref(model);
-	gtk_tree_view_set_model(GTK_TREE_VIEW(ri_vid->treeview), NULL);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(vid->treeview), NULL);
 
 	tdb = tctdbnew();
 	tctdbopen(tdb, tct_db, TDBOREADER);
 
 	qry = tctdbqrynew(tdb);
-	tctdbqryaddcond(qry, INV_TCT_COL, TDBQCSTREQ, invoice);
+	tctdbqryaddcond(qry, what, TDBQCSTREQ, search);
 	res = tctdbqrysearch(qry);
 	nres = tclistnum(res);
 
@@ -1557,9 +1557,9 @@ void view_invoice_details(const char *invoice)
 	 * Be a bit smart in the window size, try to size it correctly for
 	 * the number of rows, upto some limit.
 	 */
-	gtk_window_resize(GTK_WINDOW(ri_vid->window), 1400,
+	gtk_window_resize(GTK_WINDOW(vid->window), 1400,
 			(nres > 20) ? 640 : (nres - 2) * 24 + 160);
-	gtk_widget_show(ri_vid->window);
+	gtk_widget_show(vid->window);
 
 	for (i = 0; i < nres; i++) {
 		GtkTreeIter iter;
@@ -1569,8 +1569,8 @@ void view_invoice_details(const char *invoice)
 		rbuf = tclistval(res, i, &rsize);
 		cols = tctdbget(tdb, rbuf, rsize);
 
-		gtk_list_store_append(ri_vid->liststore, &iter);
-		gtk_list_store_set(ri_vid->liststore, &iter,
+		gtk_list_store_append(vid->liststore, &iter);
+		gtk_list_store_set(vid->liststore, &iter,
 				0, tcmapget2(cols, "entity_code"),
 				1, tcmapget2(cols, "entity_name"),
 				2, tcmapget2(cols, "post_code"),
@@ -1591,7 +1591,7 @@ void view_invoice_details(const char *invoice)
 	tctdbqrydel(qry);
 	tctdbclose(tdb);
 
-	gtk_tree_view_set_model(GTK_TREE_VIEW(ri_vid->treeview), model);
+	gtk_tree_view_set_model(GTK_TREE_VIEW(vid->treeview), model);
 	g_object_unref(model);
 }
 
