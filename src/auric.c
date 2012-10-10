@@ -1293,8 +1293,8 @@ static bool read_tmpl(const char *file, struct widgets *widgets)
 			g_ptr_array_foreach(vars, disp_vars, NULL);
 			fprintf(stdout, "\n");
 		}
-		primary_key_size = snprintf(pkbuf, sizeof(pkbuf), "%ld",
-				(int64_t)tctdbgenuid(tdb));
+		primary_key_size = snprintf(pkbuf, sizeof(pkbuf), "%lld",
+				(long long)tctdbgenuid(tdb));
 		cols = tcmapnew3("entity_code", g_ptr_array_index(vars, 0),
 				"entity_name", g_ptr_array_index(vars, 1),
 				"post_code", g_ptr_array_index(vars, 2),
