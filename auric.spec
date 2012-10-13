@@ -39,7 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/auric.png
 %{_datadir}/auric/auric.glade
 %{_datadir}/auric/auric_vid.glade
-%doc README COPYING
+%doc README COPYING tmpl.tab
 
 %changelog
 * Mon Oct 08 2012 Andrew Clayton <andrew@opentechlabs.co.uk> - 000-1.otl
