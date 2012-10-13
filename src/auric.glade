@@ -9,6 +9,8 @@
     <property name="program_name">auric</property>
     <property name="version">000</property>
     <property name="copyright" translatable="yes">Copyright © 2012	OpenTech Labs</property>
+    <property name="website">https://github.com/opentechlabs/auric</property>
+    <property name="website_label" translatable="yes">https://github.com/opentechlabs/auric</property>
     <property name="authors">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;
 Russell Green</property>
     <property name="logo">/usr/share/pixmaps/auric.png</property>
