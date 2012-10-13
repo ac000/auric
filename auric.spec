@@ -4,6 +4,7 @@ Version:	000
 Release:	1.otl%{?dist}
 Group:		Applications/Productivity
 License:	GPLv3
+URL:		https://github.com/opentechlabs/auric
 Vendor:		OpenTech Labs
 Packager:	Andrew Clayton <andrew@opentechlabs.co.uk>
 Source0:	auric-%{version}.tar
