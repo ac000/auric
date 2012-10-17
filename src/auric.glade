@@ -13,6 +13,8 @@
     <property name="website_label" translatable="yes">https://github.com/opentechlabs/auric</property>
     <property name="authors">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;
 Russell Green</property>
+    <property name="documenters">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;</property>
+    <property name="artists">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;</property>
     <property name="logo">/usr/share/pixmaps/auric.png</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
