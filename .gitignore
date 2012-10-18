@@ -1,3 +1,4 @@
 *.swp
+docs/guide/guide.pdf
 src/*.o
 src/auric
