@@ -1,6 +1,6 @@
 Summary:	Financial Data Analyser
 Name:		auric
-Version:	000
+Version:	001
 Release:	1.otl%{?dist}
 Group:		Applications/Productivity
 License:	GPLv3
@@ -44,5 +44,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc README COPYING docs/tmpl.tab docs/guide/guide.pdf
 
 %changelog
-* Mon Oct 08 2012 Andrew Clayton <andrew@opentechlabs.co.uk> - 000-1.otl
+* Thu Oct 18 2012 Andrew Clayton <andrew@opentechlabs.co.uk> - 001-1.otl
 - Initial release
