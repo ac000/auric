@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+	"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" []>
+<book>
+	<bookinfo>
+		<title>Auric User Guide</title>
+		<author>
+			<firstname>Andrew</firstname>
+			<surname>Clayton</surname>
+			<affiliation>
+				<orgname>OpenTech Labs</orgname>
+				<address>
+					<email>andrew@opentechlabs.co.uk</email>
+				</address>
+			</affiliation>
+		</author>
+		<legalnotice>
+		<para>
+			This documentation is free software; you can
+			redistribute it and/or modify it under the terms of the
+			GNU General Public License as published by the Free
+			Software Foundation; either version 3 of the License,
+			or (at your option) any later version.
+		</para>
+		<para>
+			This program is distributed in the hope that it will be
+			useful, but WITHOUT ANY WARRANTY; without even the
+			implied warranty of MERCHANTABILITY or FITNESS FOR A
+			PARTICULAR PURPOSE.
+			See the GNU General Public License for more details.
+		</para>
+		<para>
+			You should have received a copy of the GNU General
+			Public License along with this program; if not, write
+			to the Free Software Foundation, Inc., 59 Temple Place,
+			Suite 330, Boston, MA 02111-1307 USA
+		</para>
+		<para>
+			For more details see the file COPYING in the source
+			distribution of auric.
+		</para>
+		</legalnotice>
+	</bookinfo>
+	<chapter>
+		<title>Introduction</title>
+		<para>
+			Auric is a tool for analysing financial data, from say
+			accounts payable.
+		</para>
+		<para>
+			It uses Benford's Law, to look at the regularity of
+			first, second and third digits in amounts. It allows to
+			set and display amounts within certain thresholds. It
+			displays a histogram of values from &lt; 10 through to
+			&gt; 1,000,000 going through powers of 10. It displays
+			repeat values and repeat invoices. Finally, it displays
+			a list of entities with their total spend and number of
+			invoices.
+		</para>
+		<para>
+			All of these can be viewed on a per entity basis.
+		</para>
+	</chapter>
+	<chapter>
+		<title>Getting Started</title>
+		<para>
+			Once auric is running, you are presented with the main
+			application window. The first thing you need to do is
+			load in some data. This data takes the form of a simple
+			TAB separated text file. For details of the format of
+			this, see the <emphasis>docs/tmpl.tab</emphasis> file
+			from the source.
+		</para>
+		<para>
+			Use the file selection dialog to choose the file to
+			load.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/file_selector.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>File Selector</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing the file selector button
+				</para>
+			</caption>
+		</mediaobject>
+		<para>
+			Once a file has been selected, you can click the
+			<emphasis>Run</emphasis> button to process this file.
+		</para>
+		<para>
+			See the following chapters to describe what you are now
+			seeing.
+		</para>
+	</chapter>
+	<chapter>
+		<title>Benford's Law</title>
+		<para>
+			Benford's Law basically describes the distribution of
+			digits in a number. E.g The number 1 appearing as the
+			first digit of a number should happen about 30.1% of
+			the time, with the first digit being a 9 occuring about
+			4.5% of the time.
+		</para>
+		<para>
+			For more details, see this wikipedia page:
+			http://en.wikipedia.org/wiki/Benford's_law
+		</para>
+		<para>
+			In auric we look at the first three digits and have a
+			tab for each, displaying the digit distribution. The
+			display is split into two halves.
+		</para>
+		<para>
+			The right hand side shows the distribution as a graph.
+			It shows the distribution curve as predicted by
+			Benford's Law in blue and the actual distribution curve
+			of the given data in red.
+		</para>
+		<para>
+			The left hand side shows the distribution details. Each
+			row shows the digit being examined, the number of times
+			that digit appears in the said location, that number of
+			times as a percentage and the deviation from what was
+			predicted by Benford's Law, negative for less, positive
+			for more.
+		</para>
+		<para>
+			Below that, we have some other statistics, most of
+			which are self explanatory. The RSF is the Relative
+			Size Factor. This is the maximum value divided by the
+			second maximum value. This is to help find times when
+			an unusually large invoice has gone through compared to
+			the rest.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/benford.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Benford's Law</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing the Benford's Law distribution
+					for the first digit
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Centinals</title>
+		<para>
+			This tab, displays the number of values between certain
+			thresholds. These thresholds can be configured via the
+			preferences window.
+		</para>
+		<para>
+			It displays the number and percentage for each
+			threshold on the left hand side and on the right it
+			displays this information as a pie chart.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/centinals.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Centinals</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing values between various
+					thresholds
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Histogram</title>
+		<para>
+			This shows the distribution of values from &lt; 10
+			through to &gt; 1,000,000 going through powers of 10.
+		</para>
+		<para>
+			On the left hand side it displays the number and
+			percentages for each value and on the right it displays
+			them as a histogram.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/histogram.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Histogram</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing a histogram of the values
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Repeat Values</title>
+		<para>
+			This shows the top 10 repeated values, showing the
+			value and the number of time it was repeated.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/repeat_values.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Repeat Values</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing repeat values
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Repeat Invoices</title>
+		<para>
+			This shows repeat invoices. Currently it just goes by
+			the invoice number to detect duplicates.
+		</para>
+		<para>
+			If there was any repeat invoices there would be one
+			line per invoice. They would be grouped together by
+			background colour.
+		</para>
+		<para>
+			You are able to double click on any line, to get more
+			details for those invoices.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/repeat_invoices.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Repeat Invoices</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing repeat invoices
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Entities</title>
+		<para>
+			This shows entities in the given data. It displays each
+			entity along with their spend and number of invoices.
+		</para>
+		<para>
+			Again, you are able to double click a row to get more
+			details.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/entities.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Entities</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Showing the entities along with their
+					spend and number of invoices
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Filtering</title>
+		<para>
+			For each tab, you can filter by entity, using the
+			entity filter dropdown box at the bottom left hand
+			side of the application.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/entity_filter.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Entity Filter</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Filtering by entity
+				</para>
+			</caption>
+		</mediaobject>
+		<para>
+			For the Entities tab you can also filter by spend
+			amount and number of invoices.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/spend_filter.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Spend and Invoice Filter</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Filtering by amount of spend
+				</para>
+			</caption>
+		</mediaobject>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/invoice_filter.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Spend and Invoice Filter</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Filtering by number of invoices
+				</para>
+			</caption>
+		</mediaobject>
+	</chapter>
+	<chapter>
+		<title>Preferences</title>
+		<para>
+			auric lets you set some preferences. Currently there
+			are two things that can be set
+		</para>
+		<itemizedlist>
+			<listitem><para>Centinals</para></listitem>
+			<listitem><para>Decimal Places</para></listitem>
+		</itemizedlist>
+		<formalpara><title>Centinals</title>
+		<para>
+			This lets you set up to five thresholds for the
+			<emphasis>Centinals</emphasis> tab. You can set the
+			values and enable/disable them.
+		</para>
+		</formalpara>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/prefs_cen.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Centinal Preferences</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Centinals preferences
+				</para>
+			</caption>
+		</mediaobject>
+		<formalpara><title>Decimal Places</title>
+		<para>
+			This lets you set the number of decimal places that
+			will be displayed for values. It allows to set from
+			<emphasis>1</emphasis> to <emphasis>6</emphasis>
+			decimal places. It defaults to 2.
+		</para>
+		</formalpara>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/prefs_dec.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Decimal Places Preferences</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Decimal places preferences
+				</para>
+			</caption>
+		</mediaobject>
+		<para>
+			Any changes you make will last just the current
+			session.
+		</para>
+		<mediaobject>
+			<imageobject condition="print">
+				<imagedata fileref="images/prefs_save.png"
+					format="PNG" scale="40"/>
+			</imageobject>
+			<textobject>
+				<phrase>Save Preferences</phrase>
+			</textobject>
+			<caption>
+				<para>
+					Options for saving and resetting
+					preferences
+				</para>
+			</caption>
+		</mediaobject>
+		<formalpara><title>Save</title>
+		<para>
+			You can save your preferences, these get saved to
+			<emphasis>~/.config/auric/prefs</emphasis> and are
+			loaded at startup.
+		</para>
+		</formalpara>
+		<formalpara><title>Reset to Defaults</title>
+		<para>
+			This lets you reset the preferences to the application
+			defaults. This will last just for this session, unless
+			you <emphasis>Save</emphasis> them.
+		</para>
+		</formalpara>
+		<formalpara><title>Reset to Config</title>
+		<para>
+			This lets you reset the preferences back to your saved
+			configuration.
+		</para>
+		</formalpara>
+	</chapter>
+</book>
