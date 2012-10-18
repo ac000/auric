@@ -21,6 +21,7 @@ Requires:	gtk3 cairo tokyocabinet
 
 %build
 make -C src
+make -C docs/guide
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -40,7 +41,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/pixmaps/auric.png
 %{_datadir}/auric/auric.glade
 %{_datadir}/auric/auric_vid.glade
-%doc README COPYING tmpl.tab
+%doc README COPYING docs/tmpl.tab docs/guide/guide.pdf
 
 %changelog
 * Mon Oct 08 2012 Andrew Clayton <andrew@opentechlabs.co.uk> - 000-1.otl
