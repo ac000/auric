@@ -212,7 +212,7 @@
 		<title>Repeat Values</title>
 		<para>
 			This shows the top 10 repeated values, showing the
-			value and the number of time it was repeated.
+			value and the number of times it was repeated.
 		</para>
 		<mediaobject>
 			<imageobject condition="print">
@@ -236,7 +236,7 @@
 			the invoice number to detect duplicates.
 		</para>
 		<para>
-			If there was any repeat invoices there would be one
+			If there were any repeat invoices there would be one
 			line per invoice. They would be grouped together by
 			background colour.
 		</para>
@@ -307,8 +307,8 @@
 			</caption>
 		</mediaobject>
 		<para>
-			For the Entities tab you can also filter by spend
-			amount and number of invoices.
+			For the <emphasis>Entities</emphasis> tab you can also
+			filter by spend amount and number of invoices.
 		</para>
 		<mediaobject>
 			<imageobject condition="print">
