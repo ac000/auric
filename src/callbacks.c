@@ -267,7 +267,6 @@ void cb_about(GtkWidget *button, struct widgets *widgets)
 {
 	gtk_dialog_run(GTK_DIALOG(widgets->about));
 	gtk_widget_hide(widgets->about);
-
 }
 
 void cb_spawn(void)
