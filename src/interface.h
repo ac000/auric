@@ -21,7 +21,7 @@ struct vid {
 	GtkWidget *treeview;
 	GtkCellRenderer *cell;
 	GtkTreeViewColumn *col;
-} vid;
+};
 
 struct prefs {
 	GtkWidget *prefs_window;
@@ -34,7 +34,7 @@ struct prefs {
 	GtkWidget *th3;
 	GtkWidget *th_cb3;
 	GtkWidget *dp_spin;
-} prefs;
+};
 
 struct notebook {
 	GtkWidget *main_window;
@@ -48,7 +48,7 @@ struct notebook {
 	GtkWidget *treeview;
 	GtkCellRenderer *cell;
 	GtkTreeViewColumn *col;
-} notebook;
+};
 
 struct widgets {
 	GtkWidget *main_window;
@@ -64,7 +64,7 @@ struct widgets {
 
 	struct notebook notebook[NR_TABS];
 	struct prefs prefs;
-} widgets;
+};
 
 void format_cell_value(GtkTreeViewColumn *col,
 		       GtkCellRenderer *cell, GtkTreeModel *model,
