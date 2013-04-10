@@ -1,7 +1,7 @@
 /*
  * auric.c - Financial Data Analyser
  *
- * Copyright (C) 2012		OpenTech Labs
+ * Copyright (C) 2012-2013	OpenTech Labs
  * 				Andrew Clayton <andrew@opentechlabs.co.uk>
  *
  * Released under the GNU General Public License version 3.
@@ -62,7 +62,7 @@ static GArray *values;
 struct repeat_values {
 	int nr;
 	double value;
-} repeat_values;
+};
 
 char tct_db[PATH_MAX];
 
