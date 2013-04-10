@@ -1,7 +1,7 @@
 /*
  * interface.h
  *
- * Copyright (C) 2012		OpenTech Labs
+ * Copyright (C) 2012-3013	OpenTech Labs
  *				Andrew Clayton <andrew@opentechlabs.co.uk>
  *
  * Released under the GNU General Public License version 3.
