@@ -11,10 +11,10 @@
     <property name="copyright" translatable="yes">Copyright © 2012-2013	OpenTech Labs</property>
     <property name="website">https://github.com/opentechlabs/auric</property>
     <property name="website_label" translatable="yes">https://github.com/opentechlabs/auric</property>
-    <property name="authors">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;
+    <property name="authors">Andrew Clayton &lt;andrew@digital-domain.net&gt;
 Russell Green</property>
-    <property name="documenters">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;</property>
-    <property name="artists">Andrew Clayton &lt;andrew@opentechlabs.co.uk&gt;</property>
+    <property name="documenters">Andrew Clayton &lt;andrew@digital-domain.net&gt;</property>
+    <property name="artists">Andrew Clayton &lt;andrew@digital-domain.net&gt;</property>
     <property name="logo">/usr/share/pixmaps/auric.png</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
