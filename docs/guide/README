@@ -1,0 +1,7 @@
+This guide is written using DocBook, v4.1.2
+
+To build, (at least on Fedora) it requires various docbook and texlive
+packages.
+
+Installing docbook-utils-pdf & doxygen-latex should pull in all the
+required packages.
