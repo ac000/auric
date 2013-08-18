@@ -1232,7 +1232,7 @@ static bool read_tmpl(const char *file, struct widgets *widgets)
 	tdb = tctdbnew();
 	tctdbopen(tdb, tct_db, TDBOWRITER | TDBOTRUNC | TDBOCREAT);
 
-	fp = fopen(file, "r");
+	fp = fopen(file, "re");
 	while (fgets(line, sizeof(line), fp) != NULL) {
 		char *token;
 		char *running;
