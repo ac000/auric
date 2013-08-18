@@ -4,6 +4,8 @@
  * Copyright (C) 2012-2013	OpenTech Labs
  * 				Andrew Clayton <andrew@digital-domain.net>
  *
+ * 		 2013		Andrew Clayton <andrew@digital-domain.net>
+ *
  * Released under the GNU General Public License version 3.
  * See COPYING
  */
@@ -75,28 +77,6 @@ static const double hcolours[7][4] = { {0.0, 0.0, 1.0, 1.0},
 					{0.9, 1.0, 0.0, 1.0},
 					{1.0, 0.5, 0.0, 1.0},
 					{1.0, 0.0, 0.0, 1.0} };
-
-bool mkdir_p(const char *path)
-{
-	char *dir;
-	char *token;
-	char mdir[PATH_MAX] = "/";
-
-	if (strlen(path) >= PATH_MAX)
-		return false;
-
-	dir = strdup(path);
-	token = strtok(dir, "/");
-	while (token != NULL) {
-		strcat(mdir, token);
-		mkdir(mdir, 0777);
-		strcat(mdir, "/");
-		token = strtok(NULL, "/");
-	}
-	free(dir);
-
-	return true;
-}
 
 /*
  * See: http://en.wikipedia.org/wiki/Benford's_law

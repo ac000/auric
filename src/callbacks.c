@@ -4,6 +4,8 @@
  * Copyright (C) 2012-2013	OpenTech Labs
  * 				Andrew Clayton <andrew@digital-domain.net>
  *
+ * 		 2013 		Andrew Clayton <andrew@digital-domain.net>
+ *
  * Released under the GNU General Public License version 3.
  * See COPYING
  */
@@ -122,7 +124,7 @@ void cb_save_prefs(GtkWidget *button, struct widgets *widgets)
 
 	snprintf(config_dir, sizeof(config_dir) - strlen(prefs),
 			"%s/.config/auric/", getenv("HOME"));
-	mkdir_p(config_dir);
+	g_mkdir_with_parents(config_dir, 0777);
 
 	dirfd = open(config_dir, O_RDONLY);
 	fd = openat(dirfd, prefs_tmp, O_CREAT | O_WRONLY | O_TRUNC, 0666);
