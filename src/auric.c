@@ -1319,7 +1319,7 @@ void load_prefs(struct widgets *widgets)
         snprintf(config, sizeof(config), "%s/.config/auric/prefs",
 			getenv("HOME"));
 
-	fp = fopen(config, "r");
+	fp = fopen(config, "re");
 	if (!fp)
 		return;
 
