@@ -406,7 +406,7 @@ Russell Green</property>
               </packing>
             </child>
             <child>
-              <object class="GtkHBox" id="histogram_box">
+              <object class="GtkBox" id="histogram_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
