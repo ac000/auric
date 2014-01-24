@@ -1,12 +1,11 @@
 Summary:	Financial Data Analyser
 Name:		auric
 Version:	001
-Release:	1.otl%{?dist}
+Release:	1%{?dist}
 Group:		Applications/Productivity
 License:	GPLv3
-URL:		https://github.com/opentechlabs/auric
-Vendor:		OpenTech Labs
-Packager:	Andrew Clayton <andrew@opentechlabs.co.uk>
+URL:		https://github.com/ac000/auric
+Packager:	Andrew Clayton <andrew@digital-domain.net>
 Source0:	auric-%{version}.tar
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
