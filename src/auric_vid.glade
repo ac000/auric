@@ -56,6 +56,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn1">
                     <property name="title" translatable="yes">Enitity ID</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">0</property>
                     <child>
                       <object class="GtkCellRendererText" id="entity_code"/>
                       <attributes>
@@ -78,6 +80,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn3">
                     <property name="title" translatable="yes">Post Code</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">2</property>
                     <child>
                       <object class="GtkCellRendererText" id="post_code"/>
                       <attributes>
@@ -89,6 +93,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn4">
                     <property name="title" translatable="yes">VAT NO</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">3</property>
                     <child>
                       <object class="GtkCellRendererText" id="vat_no"/>
                       <attributes>
@@ -100,6 +106,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn5">
                     <property name="title" translatable="yes">Invoice</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">4</property>
                     <child>
                       <object class="GtkCellRendererText" id="inv_no"/>
                       <attributes>
@@ -111,6 +119,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn6">
                     <property name="title" translatable="yes">Gross</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">5</property>
                     <child>
                       <object class="GtkCellRendererText" id="gross">
                         <property name="xalign">1</property>
@@ -124,6 +134,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn7">
                     <property name="title" translatable="yes">VAT</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">6</property>
                     <child>
                       <object class="GtkCellRendererText" id="vat">
                         <property name="xalign">1</property>
@@ -137,6 +149,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn8">
                     <property name="title" translatable="yes">Net</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">7</property>
                     <child>
                       <object class="GtkCellRendererText" id="net">
                         <property name="xalign">1</property>
@@ -150,6 +164,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn9">
                     <property name="title" translatable="yes">PO</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">8</property>
                     <child>
                       <object class="GtkCellRendererText" id="po_no"/>
                       <attributes>
@@ -161,6 +177,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn10">
                     <property name="title" translatable="yes">Buyer</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">9</property>
                     <child>
                       <object class="GtkCellRendererText" id="buyer"/>
                       <attributes>
@@ -172,6 +190,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn11">
                     <property name="title" translatable="yes">Cost Centre</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">10</property>
                     <child>
                       <object class="GtkCellRendererText" id="cost_centre"/>
                       <attributes>
@@ -183,6 +203,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn12">
                     <property name="title" translatable="yes">Account Code</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">11</property>
                     <child>
                       <object class="GtkCellRendererText" id="acc_code"/>
                       <attributes>
@@ -194,6 +216,8 @@
                 <child>
                   <object class="GtkTreeViewColumn" id="treeviewcolumn13">
                     <property name="title" translatable="yes">Description</property>
+                    <property name="sort_indicator">True</property>
+                    <property name="sort_column_id">12</property>
                     <child>
                       <object class="GtkCellRendererText" id="acc_des"/>
                       <attributes>
