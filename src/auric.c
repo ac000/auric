@@ -39,6 +39,13 @@
 #include "auric.h"
 
 #define NR_TMPL_FIELDS	13
+#define NR_POS		 3
+#define NR_RV		10
+#define NR_THRESHOLDS	 4
+
+extern unsigned char thresholds;
+
+enum { SORT_COL_ENT = 0, SORT_COL_SPD, SORT_COL_INV };
 
 static const int x = 450;
 static const int y = 450;
@@ -66,9 +73,9 @@ struct repeat_values {
 	double value;
 };
 
-char tct_db[PATH_MAX];
+static char tct_db[PATH_MAX];
 
-int debug = 0;
+static int debug = 0;
 
 static const double hcolours[7][4] = { {0.0, 0.0, 1.0, 1.0},
 					{0.0, 0.5, 1.0, 1.0},
