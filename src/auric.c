@@ -4,7 +4,7 @@
  * Copyright (C) 2012-2013	OpenTech Labs
  * 				Andrew Clayton <andrew@digital-domain.net>
  *
- * 		 2013		Andrew Clayton <andrew@digital-domain.net>
+ * 		 2013, 2017	Andrew Clayton <andrew@digital-domain.net>
  *
  * Released under the GNU General Public License version 3.
  * See COPYING
@@ -1238,7 +1238,7 @@ static bool read_tmpl(const char *file, struct widgets *widgets)
 		char *running;
 		char *sptr;
 		int nr_fields = 0;
-		GPtrArray *vars = NULL;
+		GPtrArray *vars;
 
 		vars = g_ptr_array_new_with_free_func(free);
 		running = strdup(line);
