@@ -168,8 +168,6 @@ static void init_graph(int tab)
 {
 	int i;
 	int adj = width;
-	char x_a[2];
-	char y_a[10];
 
 	blank_image();
 
@@ -193,6 +191,8 @@ static void init_graph(int tab)
 		i = 0;
 	}
 	for ( ; i < 10; i++) {
+		char x_a[2];
+
 		cairo_move_to(cr, width * i + adj, y * 0.96);
 		snprintf(x_a, sizeof(x_a), "%d", i);
 		cairo_show_text(cr, x_a);
@@ -206,6 +206,8 @@ static void init_graph(int tab)
 
 	if (tab == 0) {
 		for ( ; i < 10; i++) {
+			char y_a[10];
+
 			cairo_move_to(cr, 3, y - b[i][tab] * 10);
 			snprintf(y_a, sizeof(y_a), "%4.1f", b[i][tab]);
 			cairo_show_text(cr, y_a);
@@ -1311,9 +1313,6 @@ void load_prefs(struct widgets *widgets)
 {
 	FILE *fp;
 	char line[LINE_MAX];
-	char *option;
-	char *value;
-	char *token;
 	char config[PATH_MAX];
 
         snprintf(config, sizeof(config), "%s/.config/auric/prefs",
@@ -1324,6 +1323,10 @@ void load_prefs(struct widgets *widgets)
 		return;
 
 	while (fgets(line, LINE_MAX, fp)) {
+		char *token;
+		char *option;
+		char *value;
+
 		token = strtok(line, "=");
 		option = token;
 		token = strtok(NULL, "=");
