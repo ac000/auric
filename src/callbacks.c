@@ -34,7 +34,7 @@
 unsigned char thresholds;
 char val_fmt[5];
 
-static gboolean show_entity_row(GtkTreeModel *model, GtkTreePath *path,
+static gboolean show_entity_row(GtkTreeModel *model, GtkTreePath *path __unused,
 				GtkTreeIter *iter, struct widgets *widgets)
 {
 	double value;
@@ -97,23 +97,23 @@ void cb_quit(void)
 	gtk_main_quit();
 }
 
-void cb_vid_close(GtkWidget *button, struct vid *vid)
+void cb_vid_close(GtkWidget *button __unused, struct vid *vid)
 {
 	gtk_widget_destroy(vid->window);
 	g_slice_free(struct vid, vid);
 }
 
-void cb_reset_prefs_config(GtkWidget *button, struct widgets *widgets)
+void cb_reset_prefs_config(GtkWidget *button __unused, struct widgets *widgets)
 {
 	load_prefs(widgets);
 }
 
-void cb_reset_prefs_default(GtkWidget *button, struct widgets *widgets)
+void cb_reset_prefs_default(GtkWidget *button __unused, struct widgets *widgets)
 {
 	set_def_prefs(widgets);
 }
 
-void cb_save_prefs(GtkWidget *button, struct widgets *widgets)
+void cb_save_prefs(GtkWidget *button __unused, struct widgets *widgets)
 {
 	char config_dir[PATH_MAX];
 	const char prefs[] = "prefs";
@@ -153,17 +153,19 @@ void cb_save_prefs(GtkWidget *button, struct widgets *widgets)
 	close(dirfd);
 }
 
-void cb_hide_prefs_window(GtkWidget *close_button, struct widgets *widgets)
+void cb_hide_prefs_window(GtkWidget *close_button __unused,
+			  struct widgets *widgets)
 {
 	gtk_widget_hide(widgets->prefs.prefs_window);
 }
 
-void cb_display_prefs_window(GtkWidget *prefs_button, struct widgets *widgets)
+void cb_display_prefs_window(GtkWidget *prefs_button __unused,
+			     struct widgets *widgets)
 {
 	gtk_widget_show(widgets->prefs.prefs_window);
 }
 
-void cb_select_file(GtkWidget *file_chooser, struct widgets *widgets)
+void cb_select_file(GtkWidget *file_chooser __unused, struct widgets *widgets)
 {
 	const char *file;
 	char *window_title;
@@ -181,7 +183,7 @@ void cb_select_file(GtkWidget *file_chooser, struct widgets *widgets)
 				widgets->entity_filter_list), 0);
 }
 
-void cb_toggle_cb(GtkWidget *cb, struct widgets *widgets)
+void cb_toggle_cb(GtkWidget *cb __unused, struct widgets *widgets)
 {
 	set_prefs(widgets);
 }
@@ -193,8 +195,8 @@ void cb_dp_spin(GtkWidget *spin)
 				GTK_SPIN_BUTTON(spin)));
 }
 
-void cb_switch_tab(GtkNotebook *notebook, GtkWidget *page, guint page_num,
-		   struct widgets *widgets)
+void cb_switch_tab(GtkNotebook *notebook __unused, GtkWidget *page __unused,
+		   guint page_num, struct widgets *widgets)
 {
 	if (page_num == ESI_TAB)
 		gtk_widget_show(widgets->esi_filter_box);
@@ -202,7 +204,7 @@ void cb_switch_tab(GtkNotebook *notebook, GtkWidget *page, guint page_num,
 		gtk_widget_hide(widgets->esi_filter_box);
 }
 
-void cb_display_entity(GtkEntry *entry, struct widgets *widgets)
+void cb_display_entity(GtkEntry *entry __unused, struct widgets *widgets)
 {
 	const char *type;
 
@@ -227,14 +229,15 @@ void cb_display_entity(GtkEntry *entry, struct widgets *widgets)
 			GTK_SORT_DESCENDING);
 }
 
-void cb_display_entity_clear(GtkEntry *entry, GtkEntryIconPosition icon_pos,
-			     GdkEvent *event,  struct widgets *widgets)
+void cb_display_entity_clear(GtkEntry *entry,
+			     GtkEntryIconPosition icon_pos __unused,
+			     GdkEvent *event __unused, struct widgets *widgets)
 {
 	gtk_entry_set_text(GTK_ENTRY(widgets->esi_entry), "");
 	cb_display_entity(entry, widgets);
 }
 
-void cb_toggle_esi(GtkWidget *widget, struct widgets *widgets)
+void cb_toggle_esi(GtkWidget *widget __unused, struct widgets *widgets)
 {
 	const char *entity = gtk_combo_box_get_active_id(GTK_COMBO_BOX(
 				widgets->entity_filter_list));
@@ -246,7 +249,7 @@ void cb_toggle_esi(GtkWidget *widget, struct widgets *widgets)
 }
 
 void cb_inv_row(GtkTreeView *treeview, GtkTreePath *path,
-		GtkTreeViewColumn *col)
+		GtkTreeViewColumn *col __unused)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -265,7 +268,7 @@ void cb_inv_row(GtkTreeView *treeview, GtkTreePath *path,
 	}
 }
 
-void cb_about(GtkWidget *button, struct widgets *widgets)
+void cb_about(GtkWidget *button __unused, struct widgets *widgets)
 {
 	gtk_dialog_run(GTK_DIALOG(widgets->about));
 	gtk_widget_hide(widgets->about);

@@ -1176,7 +1176,7 @@ out:
 	tctdbclose(tdb);
 }
 
-static void disp_vars(gpointer value, gpointer user_data)
+static void disp_vars(gpointer value, gpointer user_data __unused)
 {
 	fprintf(stdout, "%s\t", (char *)value);
 }

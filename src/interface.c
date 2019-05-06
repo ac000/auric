@@ -34,7 +34,7 @@ static void create_tags(struct widgets *widgets)
 			"hi6", "background", "#ff0000", NULL);
 }
 
-void format_cell_value(GtkTreeViewColumn *col,
+void format_cell_value(GtkTreeViewColumn *col __unused,
 		       GtkCellRenderer *cell, GtkTreeModel *model,
 		       GtkTreeIter *iter, gpointer col_no)
 {

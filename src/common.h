@@ -28,6 +28,8 @@
 #define ENT_TCT_COL	"entity_name"
 #define INV_TCT_COL	"inv_no"
 
+#define __unused	__attribute__((unused))
+
 extern char val_fmt[5];
 
 #endif /* _COMMON_H_ */
