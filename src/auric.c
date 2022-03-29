@@ -4,7 +4,8 @@
  * Copyright (C) 2012-2013	OpenTech Labs
  * 				Andrew Clayton <andrew@digital-domain.net>
  *
- * 		 2013, 2017	Andrew Clayton <andrew@digital-domain.net>
+ * 		 2013, 2017, 2022	Andrew Clayton
+ *					<andrew@digital-domain.net>
  *
  * Released under the GNU General Public License version 3.
  * See COPYING
@@ -198,7 +199,7 @@ static void init_graph(int tab)
 		i = 0;
 	}
 	for ( ; i < 10; i++) {
-		char x_a[2];
+		char x_a[12];
 
 		cairo_move_to(cr, width * i + adj, y * 0.96);
 		snprintf(x_a, sizeof(x_a), "%d", i);
